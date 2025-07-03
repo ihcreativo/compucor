@@ -36,7 +36,7 @@
      @yield('style')
 </head>
 
-<body class="{{Route::is('result_query','periodo','empresarial','impacto','dashboard','aunsenteX','importar','ubicacion') ? 'alt-menu layout-boxed':'layout-boxed'}}">
+<body class="{{Route::is('result_query','catalogo','empresarial','impacto','dashboard','aunsenteX','importar','ubicacion') ? 'alt-menu layout-boxed':'layout-boxed'}}">
     <!-- BEGIN LOADER -->
     <div id="load_screen"> 
         <div class="loader"> 

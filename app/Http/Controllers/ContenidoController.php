@@ -29,11 +29,11 @@ class ContenidoController extends Controller
     }
 
     public function corporativo_pag(){
-        $qry =  Contenido::select('id','titulo','contenido','img','frompage','publicar','id_tipo');
-        $qry->where('id_tipo','=','1');
-        $contenido = $qry->get();
+        // $qry =  Contenido::select('id','titulo','contenido','img','frompage','publicar','id_tipo');
+        // $qry->where('id_tipo','=','1');
+        // $contenido = $qry->get();
 
-        return view('corporativo', compact('contenido'));
+        return view('corporativo');
     }
 
     public function deleteContenido(Request $request){

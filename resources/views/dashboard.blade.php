@@ -7,7 +7,7 @@
         <div class="container-fluid"> 
             {{-- {{auth()->user()}} --}}
             isaias
-            <dashboard path="{{route('login.index')}}"></dashboard>
+            Herazo
             {{-- <dashboard-inicio path_img="{{asset('/img/img/@')}}" path="{{route('login.index')}}"></dashboard-inicio> --}}
         </div>
     @endsection

@@ -1,6 +1,8 @@
 @extends('compucor.bonesHome')
 @section('style')
-
+<style>
+	.thum{width: 200px !important}
+</style>
 @endsection
 @section('title')
 C O M P U C O R
@@ -20,16 +22,20 @@ C O M P U C O R
 		<img src="assets/img/intel.png" id="im" alt="">
 		<img src="assets/img/amd.png" id="im" alt="">
 	</section>
-	<section id="features" class="block">
-		<section class="container">
+	<section id="feature" class="block">
+		<section class="" id="app">
 			<section class="row">
 				<div class="title-box"><h1 class="block-title wow animated rollIn">
-				<span class="bb-top-left"></span>
-				<span class="bb-bottom-left"></span>
-				OFERTAS COMPUCOR
-				<span class="bb-top-right"></span>
-				<span class="bb-bottom-right"></span>
-				</h1></div>
+					<span class="bb-top-left"></span>
+					<span class="bb-bottom-left"></span>
+					OFERTAS COMPUCOR
+					<span class="bb-top-right"></span>
+					<span class="bb-bottom-right"></span>
+					</h1>
+					<div class="">
+						<productos_home path="{{route('login.index')}}"></productos_home>
+					</div>
+				</div>
 			</section>
 			
 			{{-- <section class="row ">
@@ -110,27 +116,18 @@ C O M P U C O R
 			<section class="row">
 				<div class="col-xs-12">
 					<div id="screenshots" class="owl-carousel owl-theme">
-            @foreach ($catProducto as $ctt)
-					  <div class="item">
-              <a href="categoria/{{$ctt->slug}}">
-                <img src="assets/img/{{$ctt->banner}}" class="img_res wow animated zoomIn">
-              </a>
-            </div>
-            @endforeach
-					  {{-- <div class="item"><img src="assets/img/screenshot-2.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-3.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-4.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-5.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-6.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-7.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-3.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-5.png" class="img_res wow animated zoomIn"></div>
-					  <div class="item"><img src="assets/img/screenshot-1.png" class="img_res wow animated zoomIn"></div> --}}
+						@foreach ($catProducto as $ctt)
+							<div class="item">
+								<a href="categoria/{{$ctt->slug}}">
+									<img src="catalogo_all/{{$ctt->banner}}" class="img_res wow animated zoomIn">
+								</a>
+							</div>
+						@endforeach  
 					</div>
-					 <div class="customNavigation">
-					  <a class="btn prev gallery-nav wow animated bounceInLeft"><i class="ion-ios-arrow-left"></i></a> 
-					  <a class="btn next gallery-nav wow animated bounceInRight"><i class="ion-ios-arrow-right"></i></a>
-					</div>
+					<div class="customNavigation">
+					<a class="btn prev gallery-nav wow animated bounceInLeft"><i class="ion-ios-arrow-left"></i></a> 
+					<a class="btn next gallery-nav wow animated bounceInRight"><i class="ion-ios-arrow-right"></i></a>
+				</div>
 				</div>
 			</section>
 		</section>

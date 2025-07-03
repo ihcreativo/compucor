@@ -24,6 +24,7 @@
         <div class="profile-info">
             <div class="user-info">
                 <div class="profile-img">
+                    
                     @if(auth()->user()->img == 'none.png')
                         <img alt="avatar" src="{{ asset('img/iuser.png' ) }} ">
                     @else      
@@ -31,7 +32,6 @@
                     @endif
                 </div>
                 <div class="profile-content">
-                    
                     <h6 class="">{{ auth()->user()->firts_name}} {{auth()->user()->last_name }}</h6>
                     <p class="">
                         @if (!empty(auth()->user()->cliente))

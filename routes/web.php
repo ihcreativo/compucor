@@ -6,12 +6,22 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ContenidoController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProductoCatController;
+
 
 Route::get('/',  [HomeController::class, 'index'])->name('login.index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/sobre-nosotros', [ContenidoController::class, 'corporativo_pag'])->name('corporativo');
+Route::post('/produtos_from_page', [ProductoController::class,'produtos_from_page']);
+Route::get('/tienda/{id}/{texto}', [ProductoController::class, 'producto_view']);
+Route::post('/productos_view',[ProductoController::class, 'producto_view_vue']);
+Route::post('/produto_imagenes', [ProductoController::class, 'get_imagenes_producto']);
+
+
+
+Route::get('/sobre-computadores-de-cordoba', [ContenidoController::class, 'corporativo_pag'])->name('corporativo');
 Route::get('/contactos', [HomeController::class, 'contactos'])->name('contactos');
-Route::get('/servici', [HomeController::class, 'servicio'])->name('servicios');
+Route::get('/servicio', [HomeController::class, 'servicio'])->name('servicios');
 Route::get('/servicios/{texto}/{id}', [HomeController::class, 'servicio']);
 Route::post('/MenuServicios_vue', [HomeController::class,'MenuServicios']);
 
@@ -26,6 +36,23 @@ Route::post('/acceso', [LoginController::class,'store']);
 Route::get('/salir', [LoginController::class, 'salir'])->name('salir');
 Route::get('/dashboard',[LoginController::class,'dashboard'])->middleware('auth')->name('dashboard');
 //vue route
+// Tienda vue
+Route::get('/catalogo', [ProductoCatController::class, 'index'])->middleware('auth')->name('catalogo');
+Route::get('/catalogo/{id}/{slug}', [ProductoCatController::class, 'categoria'])->middleware('auth')->name('categoria');
+Route::post('/getCat', [ProductoCatController::class,'getCat']);
+Route::post('/catalogo_add', [ProductoCatController::class, 'add_categoria'])->middleware('auth');
+Route::post('/subir_imagen_CAT_vue', [ProductoCatController::class, 'subir_imagen'])->middleware('auth');
+Route::post('/getProductos', [ProductoController::class, 'getProductos'])->middleware('auth');
+Route::post('/producto_del', [ProductoController::class, 'del_producto'])->middleware('auth');
+Route::post('/producto_add', [ProductoController::class, 'add_producto'])->middleware('auth');
+Route::post('/publicar_producto', [ProductoController::class, 'publicar_producto'])->middleware('auth');
+Route::post('/subir_imagen_producto', [ProductoController::class, 'subir_imagen_producto'])->middleware('auth');
+Route::post('/get_imagenes_producto', [ProductoController::class, 'get_imagenes_producto'])->middleware('auth');
+Route::post('/quitar_imagenes_producto', [ProductoController::class, 'quitar_imagenes_producto'])->middleware('auth');
+Route::post('/principal_imagen_asignar', [ProductoController::class, 'principal_imagen_asignar'])->middleware('auth');
+Route::post('/get_marca', [ProductoController::class, 'get_marca'])->middleware('auth');
+
+// fin tienda
 
 Route::get('/contenidos', [ContenidoController::class, 'index'])->middleware('auth')->name('contenidos');
 Route::post('/contenido_tipoVue', [ContenidoController::class,'contenido_tipo']);

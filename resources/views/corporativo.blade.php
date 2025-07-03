@@ -1,137 +1,126 @@
-@extends('pagina.app')
+@extends('compucor.bonesHome')
 @section('style')
 <style>
-  li{list-style: none;}
-  li #sp{display: block; font-size: 13pt; padding-top: 20px; font-weight: bold;}
-
-  .text-justify{text-align:justify !important;}
-
-  .animar{ transition:0.5s;}
-  .animar:hover{ transform: scale(1.05);}
-  .animar img{border-radius: 10px; padding: 5px; box-shadow: #18d4ca 1px 1px 3px;}
+	.thum{width: 200px !important}
 </style>
-
 @endsection
 @section('title')
-SOBRE RECICOL R&C
+C O M P U C O R
 @endsection
-
 @section('content')
-<div class="d-sm-block d-lg-none">
-  <img src="img/sobre_nosotros_sm.png" class="img-fluid" alt="">
-</div>
-<div class="d-none d-lg-block">
-  {{-- <img src="img/corporativo.jpg" width="100%" alt=""> --}}
-  <img src="img/sobre_nosotros.png" class="img-fluid" alt="">
-</div>
-<span class="d-none">
-  {{$i = 1}}
-</span>
-@foreach ($contenido as $c)
-@if($i % 2 == 0)<div class="animar bg1"> @else<div class="animar">@endif
-  <div class="container mt-2 pt-5 pb-5">
-    <div class="row mb-5">
-      <div class="col-lg-5 col-sm-12">
-        <img src="/thum/{{$c->img}}"  class="mx-auto d-block" width="80%" alt="">
-      </div>
-      <div class="col-lg-7 col-sm-12">
-        <h3 class="d-none d-lg-block ps-3">{{$c->titulo}}</h3> 
-        <div class="fs-5 text-justify p-3">
-          {!! nl2br($c->contenido)!!}
+  <br>
+  <br><br><br>
+  <section id="features_" class="text-center">
+      <img src="{{asset('assets/img/samsung.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/lg.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/acer.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/dell.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/asus.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/apple.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/hp.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/lenovo.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/intel.png')}}" id="im" alt="">
+      <img src="{{asset('assets/img/amd.png')}}" id="im" alt="">
+  </section>
+  <section id="subscribe">
+    <div class="bg-success">
+      <section class="container">
+        <div class="title-box"><h1 class="block-title wow animated rollIn animated" style="visibility: visible; animation-name: rollIn;">
+          <span class="bb-top-left"></span>
+          <span class="bb-bottom-left"></span>
+             SOBRE COMPUCOR
+          <span class="bb-top-right"></span>
+          <span class="bb-bottom-right"></span>
+          </h1>
         </div>
-      </div>
+        <section class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <p class="susbcribe-text text-start">
+            <strong>
+            Computadores de Córdoba es una empresa monteriana </strong> con más de 20 años de experiencia en el sector tecnológico. Desde nuestros inicios, nos hemos enfocado en ser un aliado confiable para hogares, empresas e instituciones que buscan soluciones tecnológicas efectivas, accesibles y de alta calidad. Nuestra amplia trayectoria en el mercado local nos ha permitido consolidar un portafolio completo que incluye:.</p>
+            <ul class="susbcribe-text text-start">
+  
+            <li>
+              Computadores de escritorio y portátiles
+            </li>
+            <li>
+              Tablets y dispositivos móviles
+            </li>
+            <li>
+              Cámaras de seguridad y videovigilancia
+            </li>
+            <li>
+              Routers y equipos de conectividad
+            </li>
+            <li>
+              Accesorios tecnológicos y periféricos
+            </li>
+            <li>
+              Asesoría personalizada y soporte técnico
+            </li>
+          </ul>
+          <p class="susbcribe-text text-start">
+            Nos diferenciamos por un trato cercano y honesto, una atención posventa responsable, y por mantenernos actualizados con las últimas tendencias en tecnología. Apostamos por el desarrollo digital de nuestra región y por construir relaciones duraderas con nuestros clientes. 
+          </p>
+          </div>
+        </section>
+      </section>
     </div>
-  </div>
-</div>
-<div class="d-none">
-  {{$i++}}
-</div>
-@endforeach
-
-
-{{-- @foreach ($allUser as $u)
-<tr>
-    <td>{{ ++$i }}</td>
-    <td class="text-center">{{$u->username}}</td>
-    <td class="df-ajuste">{{$u->firts_name}} {{$u->last_name}} --}}
-
-
-{{-- <div class="bg1 animar">
-  <div class="container mt-2 mt-2 pt-5 pb-5">
-    <div class="row mb-5">
-      <h3 class="d-lg-none text-center pb-3">NUESTRA MISIÓN</h3>
-      <div class="col-lg-5 col-sm-12">
-        <img  src="img/xmision_.png" class="mx-auto d-block" width="80%" alt="">
-      </div>
-      <div class="col-lg-7 col-sm-12">
-        <h3 class="d-sm-none d-md-block"></h3>
+    {{-- otra --}}
+    <div class="bg-danger">
+      <section class="container">
+        <div class="title-box"><h1 class="block-title wow animated rollIn animated" style="visibility: visible; animation-name: rollIn;">
+          <span class="bb-top-left"></span>
+          <span class="bb-bottom-left"></span>
+          NUESTRA MISION
+          <span class="bb-top-right"></span>
+          <span class="bb-bottom-right"></span>
+          </h1>
+        </div>
         
-        <h3 class="d-none d-lg-block ps-3">NUESTRA MISIÓN</h3> 
-        <div class="fs-5 text-justify p-3">
-          RECICOL R & C SAS  es  una empresa dedicada a la recolección y procesamiento de materiales reciclables, para el alargamiento de su vida útil a través de una red logística de servicio y comercialización, contamos con un talento humano eficiente y responsable que garantiza la satisfacción de nuestros clientes y proveedores.
-        </div>
-      </div>
+          <section class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+              <p class="susbcribe-text text-start">
+                <strong>En Computadores de Córdoba trabajamos con el compromiso</strong> 
+                de brindar soluciones tecnológicas integrales que contribuyan al crecimiento personal, profesional y empresarial de nuestros clientes. <br><br>
+                Nuestra misión es ofrecer productos y servicios tecnológicos de excelente calidad, con precios competitivos, atención personalizada y un firme compromiso con la satisfacción de quienes confían en nosotros. Buscamos acercar la tecnología a la vida cotidiana, haciendo que sea útil, confiable y accesible para todos.
+              </p>
+            </div>
+          </section>
+        
+      </section>
     </div>
-  </div>
-</div>
-<div class="animar">
-  <div class="container mt-2 pt-5 pb-5">
-    <div class="row mb-5">
-      <h3 class="d-lg-none text-center pb-3">NUESTRA VISIÓN</h3>
-      <div class="col-lg-5 col-sm-12">
-        <img  src="img/vision.jpg" class="mx-auto d-block" width="80%" alt="">
-      </div>
-      <div class="col-lg-7 col-sm-12">
-        <h3 class="d-none d-lg-block ps-3">NUESTRA VISIÓN</h3> 
-        <div class="fs-5 p-3 text-justify">
-          Ser reconocidos en Colombia como una empresa líder en su dedicación a la recolección de materiales reciclables, pioneros en la formación de una gran cultura ecológica para el cuidado del medio ambiente bajo un modelo de negocio inclusivo y sostenible, sustentado en una estructura organizacional sólida, que genere una gran alianza con nuestros clientes y proveedores gracias a relaciones de confianza, credibilidad y excelencia en el servicio, siempre buscando un mutuo beneficio.
+    {{-- otra 2 --}}
+    <div class="bg-primary pt-5">
+      <section class="container">
+        <div class="title-box"><h1 class="block-title wow animated rollIn animated" style="visibility: visible; animation-name: rollIn;">
+          <span class="bb-top-left"></span>
+          <span class="bb-bottom-left"></span>
+          NUESTRA VISION
+          <span class="bb-top-right"></span>
+          <span class="bb-bottom-right"></span>
+          </h1>
         </div>
-      </div>
+        <section class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <p class="susbcribe-text text-start">
+            <strong>En Computadores de Córdoba trabajamos con el compromiso
+             </strong> 
+              Aspiramos a ser, para el año 2030, la empresa líder en el mercado tecnológico del departamento de Córdoba, reconocida por:
+            </p>
+            <ul class="susbcribe-text text-start">
+            <li>Su excelencia en el servicio al cliente</li>
+            <li>Su innovación constante en productos y procesos</li>
+            <li>Su impacto positivo en la transformación digital de la región</li>
+            <li>Su compromiso con la ética comercial, la formación continua y el desarrollo local</li>
+          </ul>
+          <p class="susbcribe-text text-start">
+            Queremos seguir creciendo de la mano de nuestros clientes, adaptándonos a los cambios del entorno tecnológico y contribuyendo a una sociedad más conectada y eficiente.
+          </p>
+          </div>
+        </section>
+      </section>
     </div>
-  </div>
-</div>
-<div class="bg1 animar">
-  <div class="container mt-2 mt-2 pt-5 pb-5">
-    <div class="row mb-5">
-      <h3 class="d-lg-none text-center pb-3">NUESTROS VALORES</h3>
-      <div class="col-lg-5 col-sm-12">
-        <img  src="img/valores.png" class="mx-auto d-block p-3" width="80%" alt="">
-      </div>
-      <div class="col-lg-7 col-sm-12">
-        <h3 class="d-none d-lg-block ps-3">NUESTROS VALORES</h3> 
-        <div class="fs-5 p-3 text-justify">
-          <li>
-            <span id="sp">
-              HONESTIDAD
-            </span>
-             Los principios de verdad, integridad, justicia, transparencia y dialogo son la base de todas nuestras actuaciones.
-          </li>
-          <li>
-            <span id="sp">LIDERAZGO</span>
-            La innovación y anticipación nos permite ser una empresa referente que marca tendencias en nuestra actividad comercial.
-          </li>
-          <li>
-            <span id="sp">CUIDADO DE LAS PERSONAS</span>
-            Creemos en la integración e igualdad de oportunidades.
-          </li>
-          <li>
-            <span id="sp">ORIENTACION AL PROVEEDOR</span>
-            Acompañar y apoyar al proveedor en su crecimiento y conseguir su satisfacción es la base de nuestro enfoque a la excelencia.
-          </li>
-          <li>
-            <span id="sp">COMPROMISO SOCIO-AMBIENTAL</span>
-            Brindar respaldo a instituciones y Asociaciones de recicladores de oficio que contribuyen a un mejoramiento ambiental para el cuidado de la sociedad.
-          </li>
-          <li>
-            <span id="sp" >SEGURIDAD EN EL TRABAJO</span>
-            Nuestra mejor inversión en la prevención.
-          </li>
-       
-        </div>
-      </div>
-    </div>
-  </div>
-</div> --}}
 
-
+	</section>
 @endsection

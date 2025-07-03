@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\banner;
 use App\Models\Contenido;
 use App\Models\ProductoCat;
-use App\Models\Producto;
+use App\Models\producto;
 use Auth;
 use DB;
 
@@ -32,9 +32,14 @@ class HomeController extends Controller
 
         //categorias de productos
         $catProducto = ProductoCat::all(); 
-
         //return view('corporativo', compact('contenido'));
-        return view('home', compact('banner','txt_principal_1','catProducto'));
+
+        // ofertas
+        $oft =  producto::select('id','producto','especificaciones','img','precio','oferta','slug','frompage','publicar','id_categoria');
+        $oft->where('frompage','=','1');
+        $oferta =$oft->get();
+        // fin ofertas
+        return view('home', compact('banner','txt_principal_1','catProducto','oferta'));
     }
 
     public function Corporativo()
