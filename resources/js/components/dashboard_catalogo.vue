@@ -14,7 +14,8 @@
                     <span :class="opcProducto == 'create'?'btn btn-danger fs-6':'d-none'" @click="opcProducto = 'view'">Cancelar</span> -->
                     <span :class="opc == 'productosCat'?'':'d-none'">
                         <span v-if="opcProducto === 'create'" class="btn btn-danger" @click="opcProducto='view'">Cancelar</span>
-                        <span v-else class="btn btn-success" @click="opcProducto='create'">Nuevo producto </span>
+                        <span v-else-if="opcProducto === 'editar_producto'" class="btn btn-danger" @click="opcProducto = 'view'">Cancelar modificación</span>
+                        <span v-else class="btn btn-success" @click="opcProducto='create';">Nuevo producto </span>
                     </span>
                 </div>
             </div>
@@ -97,23 +98,24 @@
             <div :class="opc === 'productosCat'? 'row':'d-none'">
                 <div :class="opcProducto === 'view'?'':'d-none'">
                     <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered tbl">
                         
                         <thead>
                             <tr class="bg-dark">
                                 <th></th>
-                                <th colspan="2">PRODUCTOS</th>
-                                <th colspan="2">OPCIONES</th>
+                                <th colspan="2" style="width: 50% !important;">PRODUCTOS</th>
+                                <th colspan="2" style="width: 30% !important;">OPCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(p,i) in productosAll" :key="i">
                                 <td class="numeracion" >{{ i+1 }}</td>
-                                <td class="minimo p-1"> 
-                                    <img :src="path+'/tienda/productos/thum/'+p.img" width="100%" alt=""></td>
-                                <td>
-                                    <span class="text-uppercase">
-                                        {{ p.producto }}
+                                <td class="p-1"> 
+                                    <img :src="path+'/tienda/productos/thum/'+p.img" width="80px" alt="">
+                                </td>
+                                <td width="50%">
+                                    <span class="text-uppercase w-50">
+                                        {{ p.producto.substring(0,87) }}...
                                     </span><br>
                                     <span :class="p.oferta > 0?'text-danger  linethrough':'text-success'">
                                         Precio: 
@@ -127,15 +129,15 @@
                                 </td>
                                 <td class="fs-5">
                                     {{ p.n_img }} <i class="fa-solid fa-image"></i> <i class="fa-solid fa-circle-plus text-success raton" @click="modal_imagenes_producto('#producto_imagen','show',p)"></i>
-                               
                                 </td>
                                
-                                <td  width="30%" class="fs-4 text-end">
+                                <td  width="20%" class="fs-4 text-end">
                                     <!-- <i v-if="((c.id_tipo == 4)&&(c.hijo == 'no'))" class="fa-solid fa-circle-plus text-success raton me-4 py-1" @click="loadOpctioServices(c)" title="Crear opción de servicio"></i> -->
                                     <!-- <i :class="c.img != 'none'?'fa-solid fa-delete-left me-3 text-warning raton':'d-none'" title="Eliminar IMAGEN" @click="eliminarThum(c)"></i> -->
                                     <i :class="p.publicar == '1'?'fa-solid fa-circle-check text-success mx-3 raton':'fa-solid fa-ban text-danger mx-3 raton'" :title="p.publicar == '1'?'NO PUBLICAR':'PUBLICAR'" @click="setPublicar(p.id, p.publicar,'publicar')"></i>
                                     <i :class="p.frompage == '1'?'fa-solid fa-display text-primary mx-3 raton':'fa-solid fa-window-maximize text-dark mx-3 raton'" :title="p.publicar == '1'?'QUITAR DE FRONTPAGE':'ENVIAR A FRONTPAGE'" @click="setPublicar(p.id, p.frompage,'frompage')"></i>
-                                    <i class="fa-regular fa-pen-to-square mx-3 raton" title="MODIFICAR CONTENIDO" @click="selectContenido(p)"></i>
+                                   <br> <i class="fa-regular fa-pen-to-square mx-3 raton" title="MODIFICAR" @click="select_editar(p)"></i>
+                                   
                                     <i v-if="p.n_img === 0" class="fa-solid fa-circle-xmark text-danger mx-3 raton" title="ELIMINAR CONTENIDO" @click="producto_del(p.id,p.producto)"></i>
                                     <i v-else class="fa-solid fa-circle-xmark text-muted mx-3 "></i>
                                 </td>
@@ -145,7 +147,7 @@
                     </div>
                 </div>
                 
-                
+                <!-- Crear producto -->
                 <div :class="opcProducto === 'create'?'':'d-none'">
                     <div v-if="productosCat.categoria != undefined">
                         <div class="form card p-3">
@@ -231,6 +233,96 @@
                         </div>
                     </div>
                 </div>
+                <!-- fin crear producto -->
+
+                <!-- Editar Producto -->
+                <div :class="opcProducto === 'editar_producto'?'':'d-none'">
+                    <div v-if="productosCat.categoria != undefined">
+                        <div class="form card p-3">
+                            <label class="letter"  for="">PRODUCTO </label>
+                            <div class="input-group mb-0">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-icons"></i>
+                                </span>
+                                <!-- <input type="text" class="form-control" placeholder="Notification" aria-label="notification" aria-describedby="basic-addon1"> -->
+                                <input class="form-control" placeholder="Digite el titulo del producto" @keyup="e_load_slug_p()" type="text" v-model="ep_pro">
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <label for="" class="pt-3 letter">ESPECIFICACIONES </label>
+                                    <div class="input mb-0">
+                                        <!-- <input class="form-control" placeholder="Descripcion"  type="text" v-model="DESC"> -->
+                                        <TextArea ref="e_especificaciones"></TextArea>
+                                    </div>
+
+                                    <label for="" class="pt-3 letter">DETALLES </label>
+                                    <div class="input mb-0">
+                                        <!-- <input class="form-control" placeholder="Descripcion"  type="text" v-model="DESC"> -->
+                                        <TextArea ref="e_caracteristicas"></TextArea>
+                                    </div>
+
+                                    <label for="" class="pt-3 letter">TERMINOS </label>
+                                    <div class="input mb-0">
+                                        <!-- <input class="form-control" placeholder="Descripcion"  type="text" v-model="DESC"> -->
+                                        <TextArea ref="e_terminos"></TextArea>
+                                    </div>
+    
+                                </div>
+                                <div class="col-4">
+                                    <label for="" class="pt-3 letter">MARCA  {{ ep_marca }}</label>
+                                    <div class="input-group mb-0">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fa-solid fa-money-check-dollar"></i>
+                                        </span>
+                                        <select class="form-control" v-model="ep_marca">
+                                            <option :value="mc.marca" v-for="(mc, i) in marcas" :key="i">{{mc.marca}}</option>
+                                        </select>
+                                    </div>
+                                    <label for="" class="pt-3 letter">PRECIO </label>
+                                    <div class="input-group mb-0">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fa-solid fa-money-check-dollar"></i>
+                                        </span>
+                                        <input class="form-control" placeholder="Precio de venta"  type="text" v-model="ep_pre">
+                                    </div>
+                                    <label for="" class="pt-3 letter">OFERTA </label>
+                                    <div class="input-group mb-0">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fa-solid fa-comments-dollar"></i>
+                                        </span>
+                                        <input class="form-control" placeholder="Precio de oferta"  type="text" v-model="ep_ofe">
+                                    </div>
+                                    <div class="card my-4">
+                                        <div class="card-body py-0">
+                                            <label for="" class="pt-3 letter">PUBLICAR </label><br>
+                                            <div class="form-check form-check-primary form-check-inline">
+                                                <input class="form-check-input" checked type="radio" name="radio-checked" id="form-check-radio-default">
+                                                <label class="form-check-label" for="form-check-radio-default">
+                                                    NO
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-primary form-check-inline">
+                                                <input class="form-check-input" type="radio" name="radio-checked" id="form-check-radio-default">
+                                                <label class="form-check-label" for="form-check-radio-default">
+                                                    SI
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+                            
+                            <div class="btn btn-primary w-25 my-3 py-3" @click="producto_edit">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                MODIFICAR PRODUCTO 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin editar producto -->
+
             </div>
 
         </div>    
@@ -365,7 +457,17 @@ export default {
             p_pub:'',
             p_slu:'',
             p_idCat:'',
-            p_marca:''
+            p_marca:'',
+            
+            ep_pro:'',
+            ep_des:'',
+            ep_pre:'',
+            ep_ofe:'',
+            ep_pub:'',
+            ep_slu:'',
+            ep_idCat:'',
+            ep_marca:'',
+            ep_id:''
         }
     },
     methods:{
@@ -410,6 +512,10 @@ export default {
         load_slug_p: function(){
             const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'a','É':'e','Í':'i','Ó':'o','Ú':'u','ñ':'n','Ñ':'n',' ':'-','A':'a','B':'b','C':'c','D':'d','E':'e','F':'F','G':'g','H':'h','I':'i','J':'j','K':'k','L':'l','M':'m','N':'n','O':'o','P':'p','Q':'q','R':'r','S':'s','T':'t','U':'u','V':'v','W':'w','X':'x','Y':'y','Z':'z'};
             this.p_slu = this.p_pro.split('').map( letra => acentos[letra] || letra).join('').toString();	
+        },
+        e_load_slug_p: function(){
+            const acentos = {'á':'a','é':'e','í':'i','ó':'o','ú':'u','Á':'a','É':'e','Í':'i','Ó':'o','Ú':'u','ñ':'n','Ñ':'n',' ':'-','A':'a','B':'b','C':'c','D':'d','E':'e','F':'F','G':'g','H':'h','I':'i','J':'j','K':'k','L':'l','M':'m','N':'n','O':'o','P':'p','Q':'q','R':'r','S':'s','T':'t','U':'u','V':'v','W':'w','X':'x','Y':'y','Z':'z'};
+            this.ep_slu = this.ep_pro.split('').map( letra => acentos[letra] || letra).join('').toString();	
         },
         select_file : function(event){
             this.imagen = event.target.files[0];
@@ -476,10 +582,24 @@ export default {
                 this.status = this.state.LOADED;
             }
         },
-
+        limpiar_form_producto: function(){
+            this.p_pro = '';
+            this.p_pre = '';
+            this.p_ofe = '';
+            this.$refs.especificaciones.setText('');
+            this.$refs.caracteristicas.setText('');
+            this.$refs.terminos.setText('');
+        },
+        limpiar_form_e_producto: function(){
+            this.ep_pro = '';
+            this.ep_pre = '';
+            this.ep_ofe = '';
+            this.$refs.e_especificaciones.setText('');
+            this.$refs.e_caracteristicas.setText('');
+            this.$refs.e_terminos.setText('');
+        },  
         producto_add: function(){ 
             this.status = this.state.LOADING;
-            alert(this.p_marca);
             if(this.p_pro.length > 5){
             Swal.fire({
                 title: "Realmente desea agregar el producto  "+this.p_pro+"?",
@@ -514,7 +634,80 @@ export default {
                                 text: "Tu contenido "+this.p_pro+" ha sido creado con Exito!",
                             });
                             //this.load_categoria();
+                            this.load_categoria();
+                            this.viewCategoria(this.productosCat)
                             this.opc = 'productosCat';
+                            this.opcProducto='view';
+                            this.limpiar_form_producto();
+                        }
+                        this.status = this.state.LOADED;
+                    }).catch(err => {
+                        console.log(err);
+                        this.status = this.state.FAILED;
+                    });
+                }
+            })
+
+            }else{
+                Swal.fire("La CATEGORIA es  [...OBLIGATORIA...]");
+                this.status = this.state.LOADED;
+            }
+        },
+
+        select_editar:function(arg){
+             this.opcProducto='editar_producto';
+             this.ep_pro = arg.producto;
+             this.ep_marca = arg.marca;
+             this.ep_ofe = arg.oferta;
+             this.ep_pre = arg.precio;
+             this.ep_id = arg.id;
+             this.$refs.e_especificaciones.setText(arg.especificaciones);
+             this.$refs.e_caracteristicas.setText(arg.caracteristicas);
+             this.$refs.e_terminos.setText(arg.terminos);
+             console.log(arg)       
+        },
+        producto_edit: function(){ 
+            this.status = this.state.LOADING;
+            if(this.ep_pro.length > 5){
+            Swal.fire({
+                title: "Realmente desea modificar el producto  "+this.ep_pro+"?",
+                text: "",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Si, deseo modificarlo!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let fields =  new FormData();
+                    fields.append('producto',this.ep_pro);
+                    fields.append('slug',this.ep_slu);
+                    fields.append('especificaciones',this.$refs.e_especificaciones.getText());
+                    fields.append('caracteristicas',this.$refs.e_caracteristicas.getText());
+                    fields.append('terminos',this.$refs.e_terminos.getText());
+                    fields.append('marca',this.ep_marca);
+                    fields.append('id_categoria',this.productosCat.id);
+                    fields.append('precio',this.ep_pre);
+                    fields.append('oferta',this.ep_ofe);
+                    fields.append('id',this.ep_id);
+                    
+                    axios.post(this.path+'/producto_edit',fields).then(res => {
+                        if(res.data.state == 'ok'){
+                            console.log('registro exitoso');
+                            Swal.fire({
+                                position: "bottom-end",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1000,
+                                title: "Modificado!",
+                                text: "Tu contenido "+this.ep_pro+" ha sido modificado con Exito!",
+                            });
+                            //this.load_categoria();
+                            this.load_categoria();
+                            this.viewCategoria(this.productosCat)
+                            this.opc = 'productosCat';
+                            this.opcProducto='view';
+                            this.limpiar_form_producto();
                         }
                         this.status = this.state.LOADED;
                     }).catch(err => {
@@ -774,7 +967,8 @@ export default {
   .raton{cursor: pointer;}
   .title{font-size: 10pt; letter-spacing:0.2cap; font-weight: bold;}
   .letter{letter-spacing: 0.3cap;}
-  .minimo{width: 7%;}
+  .minimo{width: 200px;}
+  .tbl{overflow: hidden;}
   .numeracion{width: 1%;}
   .linethrough{text-decoration: line-through;}
 </style>

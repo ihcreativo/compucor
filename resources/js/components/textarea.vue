@@ -33,7 +33,11 @@
     methods:{
       getText: function(){
         return this.texto;
+      }, 
+      setText: function(arg){
+        this.texto = arg;
       }
+
     }
   };
   </script>

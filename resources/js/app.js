@@ -17,6 +17,7 @@ import TextArea from'./components/textarea.vue';
 import menu_pagina from'./components/menu_pagina.vue';
 import dashboard_catalogo from'./components/dashboard_catalogo.vue';
 import productos_home from './components/productos_home.vue';
+import productos_categorias from './components/productos_categorias.vue';
 import producto_view from './components/producto_view.vue';
 import menu_web from './components/menu_web.vue';
 
@@ -28,6 +29,7 @@ Vue.component('dashboard_catalogo', dashboard_catalogo);
 Vue.component('TextArea', TextArea);
 Vue.component('menu_pagina',menu_pagina);
 Vue.component('productos_home',productos_home);
+Vue.component('productos_categorias',productos_categorias);
 Vue.component('producto_view',producto_view);
 Vue.component('menu_web',menu_web);
 

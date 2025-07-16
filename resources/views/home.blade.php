@@ -22,10 +22,33 @@ C O M P U C O R
 		<img src="assets/img/intel.png" id="im" alt="">
 		<img src="assets/img/amd.png" id="im" alt="">
 	</section>
-	<section id="feature" class="block">
-		<section class="" id="app">
+	<section id="subscribe_">
+		<div class="text-center">
+			<h5 class="block-title wow animated rollIn">
+				<span class="bb-top-left"></span>
+				<span class="bb-bottom-left"></span>
+				COMPUTADORES DE CORDOBA
+				<span class="bb-top-right"></span>
+				<span class="bb-bottom-right"></span>
+			</h5>
+		</div>
+		<section class="container">
 			<section class="row">
-				<div class="title-box"><h1 class="block-title wow animated rollIn">
+				<div class="col-sm-10 col-sm-offset-1">
+					<br>
+					<p class="susbcribe-text">
+						Somos una empresa con más de 20 años de experiencia en el sector tecnológico. Desde nuestros inicios, nos hemos enfocado en ser un aliado confiable para hogares, empresas e instituciones que buscan soluciones tecnológicas efectivas, accesibles y de alta calidad.
+					</p>
+				</div>
+			</section>
+		</section>
+		 
+	</section>
+	<section id="feature" class="block">
+		<section class="testimonial" id="app">
+			<section class="row">
+				<div class="title-box">
+					<h1 class="block-title wow animated rollIn">
 					<span class="bb-top-left"></span>
 					<span class="bb-bottom-left"></span>
 					OFERTAS COMPUCOR
@@ -104,15 +127,6 @@ C O M P U C O R
 
 	<section id="gallery" class="block">
 		<section class="container">
-			{{-- <section class="row">
-				<div class="title-box" style="color:#fff;"><h1 class="block-title wow animated rollIn">
-				<span class="bb-top-left" style="border-color: #fff; "></span>
-				<span class="bb-bottom-left" style="border-color: #fff; "></span>
-				Gallery
-				<span class="bb-top-right" style="border-color: #fff; "></span>
-				<span class="bb-bottom-right" style="border-color: #fff; "></span>
-				</h1></div>
-			</section> --}}
 			<section class="row">
 				<div class="col-xs-12">
 					<div id="screenshots" class="owl-carousel owl-theme">
@@ -211,162 +225,8 @@ C O M P U C O R
 		</section>
 	</section> --}}
 
-	<!-- ****************************** Testimonial ************************** -->
 
-	{{-- <section id="testimonial" class="block">
-		<section class="container">
-			<section class="row">
-				<div class="title-box"><h1 class="block-title wow animated rollIn">
-				<span class="bb-top-left"></span>
-				<span class="bb-bottom-left"></span>
-				Precious Reviews
-				<span class="bb-top-right"></span>
-				<span class="bb-bottom-right"></span>
-				</h1></div>
-			</section>
-		</section>
-		<section class="container">
-			<section class="row">
-				<section class="col-xs-12">
-					<div id="review" class="owl-carousel owl-theme">
-						<div class="item">
-							<div class="row">
-								<div class="col-sm-4 col-sm-offset-1">
-									<div class="client-pic"><img class="img_res" src="assets/img/client-one.png"></div>
-									<p class="review-star">
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star-outline"></i>
-                    
-									</p>
-								</div>
-								<div class="col-sm-6">
-									<p class="review-desc">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									</p>
-									<p class="client-name">
-										Shahjahan Jewel
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="row">
-								<div class="col-sm-4 col-sm-offset-1">
-									<div class="client-pic"><img class="img_res" src="assets/img/client-one.png"></div>
-									<p class="review-star">
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star-outline"></i>
-									</p>
-								</div>
-								<div class="col-sm-6">
-									<p class="review-desc">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									</p>
-									<p class="client-name">
-										Shahjahan Jewel
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="row">
-								<div class="col-sm-4 col-sm-offset-1">
-									<div class="client-pic"><img class="img_res" src="assets/img/client-one.png"></div>
-									<p class="review-star">
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star-outline"></i>
-									</p>
-								</div>
-								<div class="col-sm-6">
-									<p class="review-desc">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									</p>
-									<p class="client-name">
-										Shahjahan Jewel
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="row">
-								<div class="col-sm-4 col-sm-offset-1">
-									<div class="client-pic"><img class="img_res" src="assets/img/client-one.png"></div> 
-									<p class="review-star">
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star-outline"></i>
-									</p>
-								</div>
-								<div class="col-sm-6">
-									<p class="review-desc">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-										tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-										quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									</p>
-									<p class="client-name">
-										Shahjahan Jewel
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-			</section>
-		</section>
-	</section> --}}
 
 	<!-- ****************************** Subscribe Section ************************** -->
-
-	{{-- <section id="subscribe">
-		<section class="container">
-			<section class="row">
-				<div class="col-sm-10 col-sm-offset-1">
-					<p class="susbcribe-text">
-					<strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor</strong> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur.</p>
-				</div>
-			</section>
-		</section>
-		<section class="container subscribe-wrap">
-			<section class="row">
-				<div class="col-sm-12">
-					<div class="row">
-						<form role="form">
-							<div class="col-xs-10">
-								<div class="form-group">
-									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-								</div>
-							</div>
-							<div class="col-xs-2">
-								<button type="submit" class="btn-custom">
-								<i class="ion-ios-arrow-thin-right"></i>
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</section>
-		</section>
-	</section> --}}
 
 @endsection

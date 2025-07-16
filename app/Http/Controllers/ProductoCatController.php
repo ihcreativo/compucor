@@ -50,8 +50,25 @@ class ProductoCatController extends Controller
         }
     }
 
-    public function categoria($id,$slug){
 
+    public function categoria($slug){
+        $qry =  productoCat::select('id','categoria','descripcion','slug','banner');    
+        $qry->where('slug','=',$slug);
+        $qry->limit(1);
+        $cat = $qry->get();
+        // productos
+        $id = $cat[0]->id;
+        $qry2 =  producto::select(DB::raw('count(productos_imagen.id_producto) as n_img'),'productos.id','productos.producto','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria');
+        $qry2->leftjoin("productos_imagen", "productos.id", "=", "productos_imagen.id_producto");
+        $qry2->where("productos.id_categoria","=",$id);
+        $qry2->groupBy('productos.id','productos.producto','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria');
+        $pro = $qry2->get();
+        // fin productos
+
+
+
+
+        return view('categoria', compact('cat','pro'));
     } 
     
     public function eliminar_imagen(Request $request){

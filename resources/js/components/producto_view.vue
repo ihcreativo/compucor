@@ -4,7 +4,8 @@
 
         <div v-if="producto[0] != undefined" class="container my-5">
             <span class="text-uppercase espacio d-block mb-5">
-                <a :href="path"> Inicio </a> / <a href="">{{ producto[0].categoria }}</a> /  {{ producto[0].producto }}
+            
+                <a :href="path"> Inicio </a> / <a :href="path+'/categoria/'+producto[0].slug">{{ producto[0].categoria }}</a> /  {{ producto[0].producto }}
             </span>
             <div class="row py-0">
                 <div class="col-sm-12 col-lg-6">              
@@ -31,8 +32,13 @@
                         $ {{ miles(producto[0].oferta) }}
                     </span>
                     <br>
-                    <div class="btn btn-primary mt-5" @click="solicitar()">
-                        SOLICITAR PRODUCTO
+                    <div class="btn btn-success mt-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                        </svg> 
+                        <span class="fs-3" @click="waap = 'on'">
+                            SOLICITAR ASESORIA
+                        </span>
                     </div>
                     <div class="ms-0" >
                         <h3 class="text-uppercase">Informacion del Producto</h3>
@@ -61,6 +67,34 @@
                     </div>
                 </div>
             </div>
+            <nav :class="waap == 'on'?'navbar fixed-bottom navbar-light bg-light':'d-none'">
+                <div class="chat">
+                    <div class="chat_title fs-2 fw-3 py-4">
+                        Compucor atencion al Cliente...!&nbsp;&nbsp;
+                    <span class="text-danger fw-bold raton" @click="waap='off'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="chat_body fs-2 text-dark mt-5">
+                        Hola ! 
+                        Estoy Interesado en <br> 
+                        {{ producto[0].producto }}
+                    </div>
+                    <div class="chat_footer text-end my-5">
+                        <a @click="waap='off'" target="_blank" :href="'https://wa.me/573004154893?text=Hola! Estoy interesado en '+producto[0].producto+ '--'+'https://compucor.com.co/tienda/'+producto[0].id+'/'+producto[0].p_slug+''">
+                            <span class="waap fs-3 fw-bold">
+                                Habla con un Asesor &nbsp;
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+      <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+    </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
 
         </div>
         <!-- modal movimiento-->
@@ -119,7 +153,8 @@ export default {
             producto:[],
             thum:[],
             img_activo : '',
-            opc: 'especificaciones'
+            opc: 'especificaciones',
+            waap:'off'
         }
     },
     methods:{
@@ -227,4 +262,21 @@ export default {
   .rojo{color:gray; font-size: 18pt; text-decoration: line-through;font-style: normal; letter-spacing: 1pt;}
   .verde{color:red; font-size: 18pt; font-style: normal; font-weight: 500; letter-spacing: 1pt;}
   .espacio{letter-spacing: 0.3cap;}
+  .chat{ width: 400px; background-color: #F7FEF9; border-radius: 14px 14px 0 0;}
+  .chat_title{background-color: #25D466; padding: 5px; color: #fff; text-align: center;  border-radius: 14px 14px 0 0;}
+  .chat_body{padding: 15px; border:#ccc 1px solid; border-radius:14px; background: #fff;  margin: 15px;} 
+  .waap{border-radius:5cap; cursor: pointer; background: #25D466; color: #fff; padding: 15px; margin: 0 15px;}
+  .waap:hover{opacity: 70%;}
+  .fixed-bottom {   
+    right: 0;
+    left: auto;
+    position: fixed;
+    bottom: 0;
+    padding: 0;
+    padding-bottom: 1rem; /* Ajusta el padding según sea necesario */
+    border:1px solid #ccc;
+    border-radius: 14px;
+   
+    box-shadow: #666 1px 1px 3px;
+    }
 </style>

@@ -167,7 +167,8 @@ a:hover {
     height: 100%;
     margin-right: -260px;
     overflow-y: auto;
-    background:#10e256;
+    background: #292828;
+    /* background:#10e256; */
     /* background: #00967f; */
     z-index: 99999999;
     -webkit-transition: all 0.4s ease 0s;
@@ -272,7 +273,27 @@ a:hover {
 /* ///////////////////////////////////////////////////////////////////// 
 //  05 - Header
 /////////////////////////////////////////////////////////////////////*/
-
+.bajo{
+    /* background-image: linear-gradient(to bottom,#10e256 7%, #3c09c6 0%, #400772 96% ); */
+    background-color: #272525;
+    border-top: #3e403f 1px solid;
+    padding-top: 10px;
+    /* background-image: linear-gradient(to bottom,#10e256 4%, #3c09c6 0%, #400772 96% );
+    height: 70px; */
+}
+.menu_inferior{
+    text-align: center;
+    margin: auto 10px;
+}
+.menu_inferior span{
+    font-size: 18px;
+    margin-right: 20px;
+   
+}
+.reserva{
+    letter-spacing: 1px;
+    
+}
 .sticky{
     position: fixed;
     width: 100%;
@@ -323,6 +344,19 @@ a:hover {
     padding: 2px 10px;
     line-height: 0;
 }
+#menu-toggle_ {
+    z-index: 1;
+    font-size: 35px;
+    float: right;
+    color: #fff;
+    margin: 5px 6px;
+    padding: 2px 10px;
+    line-height: 0;
+
+}
+
+#menu-toggle_:hover{color: #10e256;}
+
 .store-btn-container {
     padding-top: 15px;
 }
@@ -603,6 +637,26 @@ p.client-name {
     background-repeat: no-repeat;
     background-size: cover;
 }
+#subscribe_ {
+    background: url(../img/bg_verde.png); 
+    /* padding: 50px 0px; */
+    /* background-color: #10e256; */
+    /* background-color: #86d2d2; */
+    /* background-repeat: no-repeat; */
+    /* border-bottom: #2c0694 7px solid; */
+    color: #222121;
+    /* background-size: cover;
+    padding-top: 80px;
+    background-attachment: fixed;
+    position: relative; */
+
+   
+    background-size: cover;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    background-attachment: fixed;
+    position: relative;
+}
 .susbcribe-text {
     text-align: center;
     font-size: 24px;
@@ -640,30 +694,37 @@ p.client-name {
 //  12 - Contact us Section
 /////////////////////////////////////////////////////////////////////*/
 
-
+.address_ih{
+    background: url(../img/gmap-bg.jpg); 
+}
+.address_ih_list {
+    list-style: none;
+    padding: 50px 0px 50px 0px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    display: table;
+}
 .address {
     width: 30%;
     float: left;
-    background: url(../img/gmap-bg.jpg);
-    height: 640px;
+   
 }
 .mailbox {
     width: 70%;
     float: left;
-    background-image: url(../img/map-image.png);
+    /* background-image: url(../img/map-image.png); */
     background-color: #222;
-    padding-bottom: 111px;
-    height: 640px;
 }
 .address .container {
     max-width: 100%;
 }
 .mailbox .container {
-    max-width: 90%;
+    max-width: 100%;
 }
 .address-list {
     list-style: none;
-    padding: 160px 0px 70px 0px;
+    padding: 40px 0px 40px 0px;
     width: 100%;
     max-width: 350px;
     margin: 0 auto;
@@ -693,7 +754,7 @@ p.client-name {
     vertical-align: middle;
 }
 .mailbox .container {
-    margin-top: 225px;
+    margin-top: 50px;
     margin-bottom: 0px;
 }
 #contactForm input,#contactForm textarea {
@@ -762,7 +823,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 
 
 #footer {
-    background: #00967f;
+    background: #292828;
     padding: 20px 0px 22px 0px;
 }
 .footer-logo {

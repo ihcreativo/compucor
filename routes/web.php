@@ -14,6 +14,9 @@ Route::get('/',  [HomeController::class, 'index'])->name('login.index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/produtos_from_page', [ProductoController::class,'produtos_from_page']);
 Route::get('/tienda/{id}/{texto}', [ProductoController::class, 'producto_view']);
+Route::get('/categoria/{slug}', [ProductoCatController::class, 'categoria']);
+Route::post('/categoria/productos', [ProductoController::class, 'getProductos']);
+
 Route::post('/productos_view',[ProductoController::class, 'producto_view_vue']);
 Route::post('/produto_imagenes', [ProductoController::class, 'get_imagenes_producto']);
 
@@ -45,6 +48,7 @@ Route::post('/subir_imagen_CAT_vue', [ProductoCatController::class, 'subir_image
 Route::post('/getProductos', [ProductoController::class, 'getProductos'])->middleware('auth');
 Route::post('/producto_del', [ProductoController::class, 'del_producto'])->middleware('auth');
 Route::post('/producto_add', [ProductoController::class, 'add_producto'])->middleware('auth');
+Route::post('/producto_edit', [ProductoController::class, 'edit_producto'])->middleware('auth');
 Route::post('/publicar_producto', [ProductoController::class, 'publicar_producto'])->middleware('auth');
 Route::post('/subir_imagen_producto', [ProductoController::class, 'subir_imagen_producto'])->middleware('auth');
 Route::post('/get_imagenes_producto', [ProductoController::class, 'get_imagenes_producto'])->middleware('auth');

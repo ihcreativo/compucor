@@ -18,30 +18,11 @@ class ProductoController extends Controller
     public function getProductos(Request $request){
         $id = $request->id;
         // DB::raw('count(productos_imagen.id_producto) as n_img')
-        $qry =  producto::select(DB::raw('count(productos_imagen.id_producto) as n_img'),'productos.id','productos.producto','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria');
+        $qry =  producto::select(DB::raw('count(productos_imagen.id_producto) as n_img'),'productos.id', 'productos.marca','productos.producto','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria');
         $qry->leftjoin("productos_imagen", "productos.id", "=", "productos_imagen.id_producto");
         $qry->where("productos.id_categoria","=",$id);
-        $qry->groupBy('productos.id','productos.producto','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria');
+        $qry->groupBy('productos.id','productos.marca','productos.producto','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria');
         $datos = $qry->get();
-
-
-        // $datos = DB::table("productos")
-            // ->leftJoin("productos_imagen", function($join){
-            //     $join->on("productos.id", "=", "productos_imagen.id_producto");
-            // })
-            // ->select("*")
-            // ->groupBy("productos_imagen.id_producto")
-            // ->get();
-
-        //  $datos =Importacion::select('importacion.*','importacion_datos.importacion_id','auth_cliente.cliente',Importacion::raw("count('importacion_datos.importacion_id') as cantidad"))
-        //     ->join('importacion_datos','importacion.id','=','importacion_datos.importacion_id')
-        //     ->join('auth_cliente','importacion.cliente_id', '=', 'auth_cliente.id')
-        //     ->groupBy('importacion_datos.importacion_id')
-        //     ->get();
-
-        // $qry =  producto::select('id','producto','especificaciones','caracteristicas','terminos','img','precio','oferta','slug','frompage','publicar','id_categoria');
-        // $qry->where('id_categoria','=',$id);
-        // $datos = $qry->get();
         return $datos;
     }
 
@@ -53,12 +34,17 @@ class ProductoController extends Controller
         
     }
     public function producto_view($id, $texto){
-         return view('producto_view', compact('id'));
+        $qry = productoCat::select('id','categoria','descripcion', 'slug', 'banner',DB::raw("(select count(id_categoria) from productos  WHERE productos.id_categoria = productos_cat.id) as n_producto" ));
+        $datos = $qry->get();
+        return view('producto_view', compact('id','datos'));
     }
 
      public function producto_view_vue(Request $request){
         $id = $request->id;
-        $qry =  producto::select('productos.id','productos.producto','productos.marca','productos.especificaciones','productos.caracteristicas','productos.terminos','productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage','productos.publicar','productos.id_categoria','productos_cat.categoria', 'productos_cat.slug');
+        $qry =  producto::select('productos.slug as p_slug','productos.id','productos.producto','productos.marca',
+        'productos.especificaciones','productos.caracteristicas','productos.terminos',
+        'productos.img','productos.precio','productos.oferta','productos.slug','productos.frompage',
+        'productos.publicar','productos.id_categoria','productos_cat.categoria', 'productos_cat.slug');
         $qry->join('productos_cat','productos.id_categoria','=','productos_cat.id');
         $qry->where('productos.id','=',$id);
         $datos = $qry->get();
@@ -83,6 +69,30 @@ class ProductoController extends Controller
         $opc->frompage =  '0';
         $opc->id_categoria =  $request->id_categoria;
         $opc->img =  'none.png';
+
+        $opc->save();
+        return response()->json(['name' => 'add', 'state' => 'ok']);   
+    }
+
+    public function edit_producto(Request $request){
+        $this->validate(request(),[
+            'producto' => 'required',
+            'especificaciones' => 'required',
+        ]);
+        $opc=producto::find($request->id);
+
+        $opc->producto =  $request->producto;
+        $opc->slug = $request->slug;
+        $opc->especificaciones =  $request->especificaciones;
+        $opc->caracteristicas =  $request->caracteristicas;
+        $opc->terminos =  $request->terminos;
+        $opc->marca =  $request->marca;
+        $opc->precio =  $request->precio;
+        $opc->oferta =  $request->oferta;
+        $opc->publicar =  '0';
+        $opc->frompage =  '0';
+        $opc->id_categoria =  $request->id_categoria;
+        //$opc->img =  'none.png';
 
         $opc->save();
         return response()->json(['name' => 'add', 'state' => 'ok']);   

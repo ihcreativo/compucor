@@ -1,43 +1,45 @@
 
 <template>
     <div :class="status">
-        <section class="px-4 ">
-            <div class="row pt-5 mt-2 mx-4">
-                <div class="col-xl-3 col-lg-3 col-sm-6 ihmargin" v-for="(p,i) in productos" :key="i" @click="location.href=''">
-                    <div class="mx-2 mb-6 pb-3 border rounded h-100">
-                        <!-- <img class="rounded-5" :src="path+'/tienda/productos/thum/'+p.img" width="100%" alt=""><br>-->
-                        <div class="position-relative mb-3">
-                            <img class="rounded-5" :src="path+'/tienda/productos/thum/'+p.img" width="100%" alt="">
-                            <span :class="p.oferta > 0?'position-absolute top-6 start-100 translate-middle badge fs-3 rounded-pill bg-danger':'d-none'">
-                                OFERTA
-                            </span>
-                        </div>
-                        <span class="title px-3">
-                            {{ p.producto }}
+        
+        <div class="container my-5">
+            <span class="text-uppercase espacio d-block mb-5">
+                <a :href="path"> Inicio </a> / {{ cat.categoria }}
+            </span>
+            <div class="col-xl-3 col-lg-3 col-sm-6 mb-4" v-for="(p,i) in productos" :key="i" @click="location.href=''">
+                <div class="mx-3 my-3 px-2 text-center">
+                    <!-- <img class="rounded-5" :src="path+'/tienda/productos/thum/'+p.img" width="100%" alt=""><br>-->
+                    <div class="position-relative mb-3">
+                        <img class="rounded-5" :src="path+'/tienda/productos/thum/'+p.img" width="100%" alt="">
+                        <span :class="p.oferta > 0?'position-absolute top-5 start-100 translate-middle badge rounded-pill bg-danger':'d-none'">
+                            OFERTA
                         </span>
-                        <div class="text-center fs-2">
-                            <!-- <span v-html="p.descripcion"> </span> -->
-                            <span :class="p.oferta > 0?'rojo':'text-success'"> 
-                                <i class="fa-solid fa-dollar-sign"></i>
-                                $ {{ miles(p.precio) }} 
-                            </span>
-                            <span :class="p.oferta > 0?'verde ':'d-none'">
-                                <br>
-                                <i class="fa-solid fa-dollar-sign"></i>
-                                $ {{ miles(p.oferta) }}
-                            </span><br>
-                            <a :href="path+'/tienda/'+p.id+'/'+p.slug">
-                                <span class="btn btn-primary" >
-                                    Ver mas
-                                </span>
-                            </a>
-                               
-                        </div>
                     </div>
-                    
+                    <span class="title">
+                        {{ p.producto }}
+                    </span>
+                    <div class="text-center fs-2">
+                        <!-- <span v-html="p.descripcion"> </span> -->
+                        <span :class="p.oferta > 0?'rojo':'text-success'"> 
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            $ {{ miles(p.precio) }} 
+                        </span>
+                        <span :class="p.oferta > 0?'verde ':'d-none'">
+                            <br>
+                            <i class="fa-solid fa-dollar-sign"></i>
+                            $ {{ miles(p.oferta) }}
+                        </span><br>
+                        <a :href="path+'/tienda/'+p.id+'/'+p.slug">
+                            <span class="btn btn-primary" >
+                                Ver mas
+                            </span>
+                        </a>
+                           
+                    </div>
                 </div>
+                
             </div>
-        </section>
+        </div>
         <!-- modal movimiento-->
         <div class="modal fade" id="loadOpctioServices" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -67,7 +69,7 @@ import axios from 'axios';
 export default {
     props:{
         path:{type:String, default:''},
-        id : {type:String, default:'0'}
+        cat : {type:String, default:'0'}
     },
 
     data() {
@@ -88,14 +90,16 @@ export default {
             return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
         },
         
-        load_productos: function(){
+        load_productos: function(id){
             this.status = this.state.LOADING;
-            axios.post(this.path+'/produtos_from_page').then(res => {
+            let fields =  new FormData();
+            fields.append('id',id);
+            axios.post(this.path+'/categoria/productos', fields).then(res => {
                 this.productos = res.data;
                 this.status = this.state.LOADED;
                 // this.contenidosAll = this.ordenarContenido(res.data);
                 console.log('---ih')
-                // console.log(this.contenidosAll);
+                console.log(this.productos);
                 console.log('va');
             }).catch(err => {
                 console.log(err);
@@ -136,7 +140,8 @@ export default {
 
     },
     mounted() {
-      this.load_productos();
+       this.cat = JSON.parse(this.cat);
+       this.load_productos(this.cat.id);
     }
 }
 </script>
@@ -159,5 +164,5 @@ export default {
   .title{font-size: 12pt; text-transform: uppercase; letter-spacing:2pt; color: #666; padding: 2px 0 2px 0;}
   .rojo{color:gray; font-size: 18pt; text-decoration: line-through;font-style: normal; letter-spacing: 1pt;}
   .verde{color:red; font-size: 18pt; font-style: normal; font-weight: 500; letter-spacing: 1pt;}
-  .ihmargin{margin-bottom: 1cm !important;}
+  .espacio{letter-spacing: 0.3cap;}
 </style>

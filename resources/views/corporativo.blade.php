@@ -22,8 +22,8 @@ C O M P U C O R
       <img src="{{asset('assets/img/intel.png')}}" id="im" alt="">
       <img src="{{asset('assets/img/amd.png')}}" id="im" alt="">
   </section>
-  <section id="subscribe">
-    <div class="bg-success">
+  <section id="subscribe" class="pt-5">
+    <div class="">
       <section class="container">
         <div class="title-box"><h1 class="block-title wow animated rollIn animated" style="visibility: visible; animation-name: rollIn;">
           <span class="bb-top-left"></span>
@@ -67,8 +67,8 @@ C O M P U C O R
       </section>
     </div>
     {{-- otra --}}
-    <div class="bg-danger">
-      <section class="container">
+    <div class="" style="background-color: #f0f0f0;">
+      <section class="container pt-5">
         <div class="title-box"><h1 class="block-title wow animated rollIn animated" style="visibility: visible; animation-name: rollIn;">
           <span class="bb-top-left"></span>
           <span class="bb-bottom-left"></span>
@@ -91,7 +91,7 @@ C O M P U C O R
       </section>
     </div>
     {{-- otra 2 --}}
-    <div class="bg-primary pt-5">
+    <div class="pt-5">
       <section class="container">
         <div class="title-box"><h1 class="block-title wow animated rollIn animated" style="visibility: visible; animation-name: rollIn;">
           <span class="bb-top-left"></span>
